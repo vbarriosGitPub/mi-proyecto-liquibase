@@ -19,7 +19,7 @@ jobs:
       - name: Instalar Liquibase
         uses: liquibase/setup-liquibase@v2
         with:
-          version: '4.29.2'
+          version: '4.33.0'
           edition: 'community'
 
       - name: Ejecutar Liquibase Update
