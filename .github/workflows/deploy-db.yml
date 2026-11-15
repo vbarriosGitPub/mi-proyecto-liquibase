@@ -1,0 +1,29 @@
+name: Desplegar Base de Datos con Liquibase
+
+on:
+  workflow_dispatch: # Permite que Port.io lo dispare manualmente
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Instalar Liquibase
+        uses: liquibase/setup-liquibase@v2
+        with:
+          version: '4.29.2'
+
+      - name: Ejecutar Liquibase Update
+        run: liquibase update
+        env:
+          LIQUIBASE_COMMAND_URL: ${{ secrets.DB_URL }}
+          LIQUIBASE_COMMAND_USERNAME: ${{ secrets.DB_USER }}
+          LIQUIBASE_COMMAND_PASSWORD: ${{ secrets.DB_PASSWORD }}
