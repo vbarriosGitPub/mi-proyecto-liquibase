@@ -20,6 +20,7 @@ jobs:
         uses: liquibase/setup-liquibase@v2
         with:
           version: '4.29.2'
+          edition: 'community'
 
       - name: Ejecutar Liquibase Update
         run: liquibase update
